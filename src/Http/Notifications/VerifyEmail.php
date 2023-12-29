@@ -7,9 +7,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Lang;
 
-class VerifyEmail extends \Illuminate\Auth\Notifications\VerifyEmail implements ShouldQueue
+class VerifyEmail extends \Illuminate\Auth\Notifications\VerifyEmail
 {
-    use Queueable;
+//    use Queueable;
 
     /**
      * Get the verify email notification mail message for the given URL.
@@ -21,8 +21,8 @@ class VerifyEmail extends \Illuminate\Auth\Notifications\VerifyEmail implements 
     {
         return (new MailMessage)
             ->subject(Lang::get('Verify Email Address Overwrite'))
-            ->theme('bee-notify::vendor.mail.html.themes.abc')
-            ->template('bee-notify::vendor.mail.html.message')
+            ->theme('bee-notify::html.themes.default')
+            ->template('bee-notify::html.message')
             ->markdown('bee-notify::email.verify-email');
     }
 

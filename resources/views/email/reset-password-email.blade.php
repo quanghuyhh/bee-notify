@@ -1,16 +1,16 @@
 @component('bee-notify::vendor.mail.html.message')
+  Dear Customer,
+  Have you trouble signing in?
 
-  # New login to your account
+  Resetting your password is easy.
 
-  Hi , we detected a new login on {{ config('app.name') }}.
+  Just press the button below and follow the instructions. We’ll have you up and running in no time.
+  @component('mail::button', ['url' => $url])
+    Reset Password
+  @endcomponent
 
-  Browser:
-  Operating system:
-  Position:
-  IP:
+  If you did not make this request then please ignore this email.
 
-  If it was you, you can safely ignore this email. If it wasn't you, change your password to help protect your account.
-
-  Thanks,<br>
-  {{ config('app.name') }}
+  Best regards,
+  SunSport Support Team.
 @endcomponent

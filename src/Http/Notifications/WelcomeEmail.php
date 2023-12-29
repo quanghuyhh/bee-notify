@@ -14,15 +14,39 @@ class WelcomeEmail extends Notification
 //    use Queueable;
 
     /**
+     * Get the notification's channels.
      *
-     * @return \Illuminate\Notifications\Messages\MailMessage
+     * @param  mixed  $notifiable
+     * @return array|string
      */
-    protected function buildMailMessage()
+    public function via($notifiable)
+    {
+        return ['mail'];
+    }
+
+    /**
+     * Build the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return MailMessage
+     */
+    public function toMail($notifiable)
+    {
+        return $this->buildMailMessage($notifiable);
+    }
+
+    /**
+     *
+     * @return MailMessage
+     */
+    protected function buildMailMessage($notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject(Lang::get('Verify Email Address Overwrite'))
-            ->theme('bee-notify::vendor.mail.html.themes.abc')
+            ->subject(Lang::get('Remind about Automatically Renewal'))
+            ->theme('bee-notify::vendor.mail.html.themes.default')
             ->template('bee-notify::vendor.mail.html.message')
-            ->markdown('bee-notify::email.welcome-email');
+            ->markdown('bee-notify::email.welcome-email', [
+                'user' => $notifiable
+            ]);
     }
 }
