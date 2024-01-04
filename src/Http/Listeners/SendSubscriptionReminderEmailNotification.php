@@ -16,6 +16,9 @@ class SendSubscriptionReminderEmailNotification
      */
     public function handle(SubscriptionRenewReminder $event)
     {
+        if (empty($event->user) || !method_exists($event->user, 'notify')) {
+            return;
+        }
         $event->user->notify(new SubscriptionReminderEmail);
     }
 }

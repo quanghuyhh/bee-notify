@@ -18,6 +18,9 @@ class SendTransactionCompletedEmailNotification
         $transaction = $event->transaction;
         $subscription = $transaction->subscription;
         $user = $subscription->user;
+        if (empty($user) || !method_exists($user, 'notify')) {
+            return;
+        }
         $user->notify(new TransactionCompletedEmail($event->transaction));
     }
 }

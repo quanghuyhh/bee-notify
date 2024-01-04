@@ -18,7 +18,7 @@ class SendWelcomeEmailNotification
     public function handle(Login $event)
     {
         Log::info(sprintf("[%s][%s] WelcomeEmail", self::class, Carbon::now()), [$event]);
-        if (!empty(optional($event->user)->first_visited_url)) {
+        if (!empty(optional($event->user)->first_visited_url) || !method_exists($event->user, 'notify')) {
             return;
         }
 
