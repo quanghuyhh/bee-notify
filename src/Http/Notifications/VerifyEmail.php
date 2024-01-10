@@ -21,7 +21,7 @@ class VerifyEmail extends \Illuminate\Auth\Notifications\VerifyEmail
     protected function buildMailMessage($url)
     {
         return (new MailMessage)
-            ->subject(Lang::get('Verify Email Address Overwrite'))
+            ->subject(Lang::get('Verify Email Address'))
             ->theme(ThemeHelper::getTheme())
             ->template(ThemeHelper::getTemplate())
             ->markdown('bee-notify::email.verify-email');

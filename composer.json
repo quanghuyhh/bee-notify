@@ -4,7 +4,7 @@
     "type": "library",
     "keywords": ["laravel", "bee", "notify", "addon"],
     "license": "MIT",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "authors": [
         {
             "name": "Huy Hoang",

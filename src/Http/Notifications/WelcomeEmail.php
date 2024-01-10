@@ -43,7 +43,7 @@ class WelcomeEmail extends Notification
     protected function buildMailMessage($notifiable): MailMessage
     {
         return (new MailMessage)
-            ->subject(Lang::get('Remind about Automatically Renewal'))
+            ->subject(Lang::get('Thank you for signing up'))
             ->theme(ThemeHelper::getTheme())
             ->template(ThemeHelper::getTemplate())
             ->markdown(ThemeHelper::getView('welcome-email'), [
