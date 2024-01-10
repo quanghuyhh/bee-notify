@@ -1,9 +1,12 @@
+@php
+    use Bee\Notify\Helpers\ThemeHelper;
+@endphp
 <x-mail::layout>
 {{-- Header --}}
 <x-slot:header>
-<x-mail::header :url="config('app.url')">
+@component(ThemeHelper::getComponent('header'), ['url' => config('app.url')])
 {{ config('app.name') }}
-</x-mail::header>
+@endcomponent
 </x-slot:header>
 
 {{-- Body --}}

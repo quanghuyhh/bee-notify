@@ -2,6 +2,8 @@
 
 namespace Bee\Notify\Helpers;
 
+use Illuminate\Support\Str;
+
 class ThemeHelper
 {
     public static function getTheme($style = 'default'): string
@@ -43,5 +45,22 @@ class ThemeHelper
         $theme = config('app.theme');
         $childThemePath = base_path("themes/{$theme}/resources/views");
         return is_dir($childThemePath);
+    }
+
+    public static function getComponent($name)
+    {
+        $theme = config('app.theme');
+        $childThemePath = base_path("themes/{$theme}/resources/views/vendor/mail/html");
+        $viewPath = sprintf("%s/%s.blade.php", $childThemePath, $name);
+        if (!file_exists($viewPath)) {
+            return sprintf('bee-notify::vendor.mail.html.%s', $name);
+        }
+        return sprintf("bee-notify::vendor.mail.html.%s", $name);
+    }
+
+    public static function getThemeAsset($path)
+    {
+        $theme = config('app.theme');
+        return url(sprintf('/themes/%s/%s', Str::kebab($theme), $path));
     }
 }
