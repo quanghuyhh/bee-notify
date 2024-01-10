@@ -2,6 +2,7 @@
 
 namespace Bee\Notify\Http\Notifications;
 
+use Bee\Notify\Helpers\ThemeHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -43,9 +44,9 @@ class WelcomeEmail extends Notification
     {
         return (new MailMessage)
             ->subject(Lang::get('Remind about Automatically Renewal'))
-            ->theme('bee-notify::vendor.mail.html.themes.default')
-            ->template('bee-notify::vendor.mail.html.message')
-            ->markdown('bee-notify::email.welcome-email', [
+            ->theme(ThemeHelper::getTheme())
+            ->template(ThemeHelper::getTemplate())
+            ->markdown(ThemeHelper::getView('welcome-email'), [
                 'user' => $notifiable
             ]);
     }

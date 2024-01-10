@@ -16,6 +16,7 @@ class SendEmailVerificationNotification
      */
     public function handle(Registered $event): void
     {
+        $event->user->notify(new VerifyEmail);
         if ($event->user instanceof MustVerifyEmail && ! $event->user->hasVerifiedEmail()) {
             $event->user->notify(new VerifyEmail);
         }

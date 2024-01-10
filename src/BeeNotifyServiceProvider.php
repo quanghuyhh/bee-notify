@@ -75,12 +75,22 @@ class BeeNotifyServiceProvider extends ServiceProvider
 
     private function registerResources(): void
     {
-        $this->loadViewsFrom(__DIR__.'/../resources/views', self::PACKAGE_NAMESPACE);
-
         $newMarkdownPaths = array_merge(
             config('mail.markdown.paths'),
             [__DIR__.'/../resources/views/vendor/mail/html']
         );
+        $theme = config('app.theme');
+
+        $this->loadViewsFrom(__DIR__.'/../resources/views', self::PACKAGE_NAMESPACE);
+        if (!empty($theme)) {
+            $this->loadViewsFrom(base_path("themes/{$theme}/resources/views"), self::PACKAGE_NAMESPACE);
+//            $newMarkdownPaths = array_merge(
+//                $newMarkdownPaths,
+//                [base_path("themes/{$theme}/resources/views/vendor/mail/html")]
+//            );
+        }
+
+
         config(['mail.markdown.paths' => $newMarkdownPaths]);
     }
 
@@ -101,5 +111,10 @@ class BeeNotifyServiceProvider extends ServiceProvider
         foreach ($this->overwriteAliases as $oldAlias => $newAlias) {
             $this->app->alias($newAlias, $oldAlias);
         }
+    }
+
+    public function registerComponents()
+    {
+        $components = [];
     }
 }

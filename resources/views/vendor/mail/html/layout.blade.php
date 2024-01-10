@@ -22,6 +22,9 @@ width: 100% !important;
 width: 100% !important;
 }
 }
+body, html {
+  background: yellow;
+}
 </style>
 </head>
 <body>

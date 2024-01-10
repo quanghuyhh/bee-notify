@@ -2,6 +2,7 @@
 
 namespace Bee\Notify\Http\Notifications;
 
+use Bee\Notify\Helpers\ThemeHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -21,8 +22,8 @@ class VerifyEmail extends \Illuminate\Auth\Notifications\VerifyEmail
     {
         return (new MailMessage)
             ->subject(Lang::get('Verify Email Address Overwrite'))
-            ->theme('bee-notify::html.themes.default')
-            ->template('bee-notify::html.message')
+            ->theme(ThemeHelper::getTheme())
+            ->template(ThemeHelper::getTemplate())
             ->markdown('bee-notify::email.verify-email');
     }
 

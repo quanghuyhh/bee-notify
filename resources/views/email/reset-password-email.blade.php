@@ -1,4 +1,4 @@
-@component('bee-notify::vendor.mail.html.message')
+@component('mail::message')
   Dear Customer,
   Have you trouble signing in?
 

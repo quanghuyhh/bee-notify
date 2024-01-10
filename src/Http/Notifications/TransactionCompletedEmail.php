@@ -3,6 +3,7 @@
 namespace Bee\Notify\Http\Notifications;
 
 use App\Models\Transaction;
+use Bee\Notify\Helpers\ThemeHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -29,8 +30,8 @@ class TransactionCompletedEmail extends Notification implements ShouldQueue
     {
         return (new MailMessage)
             ->subject(Lang::get('Verify Email Address Overwrite'))
-            ->theme('bee-notify::vendor.mail.html.themes.abc')
-            ->template('bee-notify::vendor.mail.html.message')
+            ->theme(ThemeHelper::getTheme())
+            ->template(ThemeHelper::getTemplate())
             ->markdown('bee-notify::email.transaction-completed-email');
     }
 }

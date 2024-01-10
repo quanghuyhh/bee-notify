@@ -1,7 +1,8 @@
 <?php
 
-namespace Bee\Notify;
+namespace Bee\Notify\Http\Notifications;
 
+use Bee\Notify\Helpers\ThemeHelper;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -21,9 +22,9 @@ class ResetPassword extends \Illuminate\Auth\Notifications\ResetPassword impleme
     {
         return (new MailMessage)
             ->subject(Lang::get('Reset Password Notification'))
-            ->theme('bee-notify::html.themes.default')
-            ->template('bee-notify::html.message')
-            ->markdown('bee-notify::email.reset-password-email', [
+            ->theme(ThemeHelper::getTheme())
+            ->template(ThemeHelper::getTemplate())
+            ->markdown(ThemeHelper::getView('reset-password-email'), [
                 'url' => $url,
                 'count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')
             ]);
@@ -41,7 +42,10 @@ class ResetPassword extends \Illuminate\Auth\Notifications\ResetPassword impleme
             return call_user_func(static::$createUrlCallback, $notifiable, $this->token);
         }
 
-        return url('reset');
+        return url(route('auth.password.reset', [
+            'token' => $this->token,
+            'email' => $notifiable->getEmailForPasswordReset(),
+        ], false));
     }
 
 }
