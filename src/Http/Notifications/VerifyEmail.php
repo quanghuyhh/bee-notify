@@ -8,9 +8,9 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Support\Facades\Lang;
 
-class VerifyEmail extends \Illuminate\Auth\Notifications\VerifyEmail
+class VerifyEmail extends \Illuminate\Auth\Notifications\VerifyEmail implements ShouldQueue
 {
-//    use Queueable;
+    use Queueable;
 
     /**
      * Get the verify email notification mail message for the given URL.

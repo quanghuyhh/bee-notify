@@ -17,12 +17,13 @@ class SendWelcomeEmailNotification
      */
     public function handle(Login $event)
     {
-        Log::info(sprintf("[%s][%s] WelcomeEmail", self::class, Carbon::now()), [$event]);
+        email_log(self::class, $event);
         if (!empty(optional($event->user)->first_visited_url) || !method_exists($event->user, 'notify')) {
+            email_log(self::class, $event, 'Unprocessed');
             return;
         }
 
-        Log::info("Send email");
         $event->user->notify(new WelcomeEmail);
+        email_log(self::class, $event, 'Finished');
     }
 }

@@ -9,10 +9,9 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Lang;
 
-class WelcomeEmail extends Notification
-//    implements ShouldQueue
+class WelcomeEmail extends Notification implements ShouldQueue
 {
-//    use Queueable;
+    use Queueable;
 
     /**
      * Get the notification's channels.

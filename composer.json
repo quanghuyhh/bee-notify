@@ -4,7 +4,7 @@
     "type": "library",
     "keywords": ["laravel", "bee", "notify", "addon"],
     "license": "MIT",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "authors": [
         {
             "name": "Huy Hoang",
@@ -21,6 +21,9 @@
         "symfony/var-dumper": "5.1.5.*@dev"
     },
     "autoload": {
+        "files": [
+          "src/helpers.php"
+        ],
         "psr-4": {
             "Bee\\Notify\\": "src"
         }
